@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"encoding/json"
 	"github.com/admarcel/go_http_server/version"
+	"encoding/json"
+
 )
 
 func main() {
