@@ -8,7 +8,7 @@ env:
   - secure: JoxLEU9sZUDi5eOOT9FMUt54bkEto5Ppd/zJ9zHY4nFBX1goB/0SLa3XVl9ygTj+W+kc3DCj+DO54jqFi9B1QjeINga0/hM8WsCs+kgXMGf6RgyGXClWqUhTxs7ib1uNKXJk533VW4mGmu2jGGNyZhXgQOUq2c3tKXd9xf52twfFQSpqcBbQzhsZpyeAXDHisRDmmU89vZkUG2nnjct8G4ygpMB2+x189VM9Asoy1SorUsuoVuXBgmajtRxSTHAsGq7fG9/xbRY7KVpDPHY+j9aFBYKiHRqpdL9tiQyHdfLpMOYq7IDTyZkM2iljt/L0KVl9qHXbo8P7hAEkik5BkSqNooN06Y/V9IwoJSqtO0iqCSWBjTPJQrTI+IZh2MXzytpv3QPQqxA3BYOasnW+rCvQ2sK8hNeHJIUWa4vRdjn+bEjhUCOpp2rNlxwZo5VTTgkBdCj/sstFn6ARaqRqEt5ACTcOGSZGkiCM3tzCSe3D2aGMfjMkohbzlOHmdtpUNmOJfcZKUFQf/fhCgoebWNv8tvEPioH7zLY1zHpZVKoJoyotr1iJ4iZdrwAa6J42eNRvnXz8xVVUXwBMkdtUWsaFwhw0m/hOG39GaWCnCQygS+R17GxM/fKKwT4Q+l6ZWtjtENn0Rz/cIufJLhzTT4iET4hkf9vtCytHVk48nzU= # DOCKER_PASSWORD
   - COMMIT=${TRAVIS_COMMIT::8}
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=admarcel/go_http_server
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build -f Dockerfile -t $REPO:$COMMIT .
