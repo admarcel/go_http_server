@@ -1,6 +1,10 @@
 package version
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"encoding/json"
+)
 
 var GitBranch = ""
 var GitHash = ""
@@ -15,6 +19,17 @@ func GetVersion() (Version) {
 		Branch: GitBranch,
 		Hash:   GitHash,
 	}
+}
+
+func Handler(w http.ResponseWriter, r *http.Request){
+	current_version := GetVersion()
+	payload, err := json.Marshal(current_version)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(payload)
 }
 
 
