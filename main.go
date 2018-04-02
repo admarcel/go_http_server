@@ -1,34 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"github.com/admarcel/go_http_server/version"
-	"encoding/json"
-
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/admarcel/go_http_server/handlers"
+	"fmt"
 )
 
 func main() {
-
-	version := version.GetVersion()
-	fmt.Printf("version: %s", version.String())
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Welcome to version %s", version.String())
-	})
-
-	http.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) {
-		payload, err := json.Marshal(version)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(payload)
-	})
-
-	fs := http.FileServer(http.Dir("static/"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
-
+	http.Handle("/metrics", promhttp.Handler())
+	http.HandleFunc("/version", version.Handler)
+	http.HandleFunc("/", handlers.RootHandler)
 	http.ListenAndServe(":8080", nil)
+	fmt.Println("Listening on :8000")
 }
