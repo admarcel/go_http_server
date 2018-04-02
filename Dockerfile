@@ -5,6 +5,7 @@ RUN apt-get update
 RUN apt-get install -y build-essential git make
 WORKDIR /go/src/github.com/admarcel/go_http_server
 COPY ./ .
+RUN go get -u github.com/golang/dep/cmd/dep
 RUN dep ensure
 RUN make
 
