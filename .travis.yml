@@ -10,10 +10,10 @@ env:
   - COMMIT=${TRAVIS_COMMIT::8}
   
   
-before:
+before_script:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - export REPO=admarcel/go_http_server
-  
+
 script:
   - docker build -f Dockerfile -t "$REPO:$COMMIT" .
   
