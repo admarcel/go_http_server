@@ -10,5 +10,4 @@ LDFLAGS = -s -w  -extldflags '-static' \
 
 build: main.go
 	mkdir -p bin/
-	#export CGO_ENABLED=0
 	go build -a -ldflags "$(LDFLAGS)" -o bin/go_http_server
