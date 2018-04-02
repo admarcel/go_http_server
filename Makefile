@@ -10,4 +10,5 @@ LDFLAGS = -s -w  -extldflags '-static' \
 
 build: main.go
 	mkdir -p bin/
+	dep ensure
 	go build -a -ldflags "$(LDFLAGS)" -o bin/go_http_server
