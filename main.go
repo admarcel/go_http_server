@@ -11,7 +11,7 @@ func main() {
 
 	version := version.GetVersion()
 	fmt.Printf("version: %s", version.String())
-	fmt.Printf("version: %s", version.String())
+	fmt.Printf("version: %s", version.String()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Welcome to version %s", version.String())
