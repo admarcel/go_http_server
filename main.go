@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"github.com/admarcel/go_http_server/version"
 	"encoding/json"
-
+	"fmt"
+	"github.com/admarcel/go_http_server/version"
+	"net/http"
 )
 
 func main() {
 
 	version := version.GetVersion()
+	fmt.Printf("version: %s", version.String())
 	fmt.Printf("version: %s", version.String())
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
